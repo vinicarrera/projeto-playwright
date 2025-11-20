@@ -2,6 +2,10 @@
 
 Este projeto é um portfólio de testes automatizados End-to-End (E2E) utilizando **Playwright** e **TypeScript**. O objetivo é demonstrar boas práticas de QA, incluindo o padrão **Page Object Model (POM)** e integração contínua.
 
+## 📊 Ver Relatório Online
+Você pode visualizar a execução mais recente dos testes diretamente no navegador, sem precisar baixar nada:
+[**Acessar Relatório Allure (GitHub Pages)**](https://vinicarrera.github.io/projeto-playwright/)
+
 ## 🚀 Tecnologias Utilizadas
 
 - **[Playwright](https://playwright.dev/)**: Framework de testes moderno e rápido.
