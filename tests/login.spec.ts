@@ -1,9 +1,15 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../pages/LoginPage.js';
 
-test('deve exibir mensagem de erro ao fazer login inválido', async ({ page }) => {
-  await page.goto('https://the-internet.herokuapp.com/login');
-  await page.fill('#username', 'usuario_teste');
-  await page.fill('#password', 'senha_errada');
-  await page.click('button[type="submit"]');
-  await expect(page.locator('#flash')).toContainText('Your username is invalid!');
+test.describe('Funcionalidade de Login', () => {
+  // Teste de sucesso removido pois já é coberto pelo fluxo E2E
+
+  test('deve exibir mensagem de erro ao fazer login com credenciais inválidas', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+
+    await loginPage.navigate();
+    await loginPage.login('usuario_invalido', 'senha_errada');
+
+    await expect(loginPage.errorMessage).toContainText('Epic sadface: Username and password do not match any user in this service');
+  });
 });
