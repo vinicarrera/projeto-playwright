@@ -8,7 +8,6 @@ config:
       arrivalRate: 5
       rampTo: 10
       name: Ramp up load
-  processor: "./processor.ts"
 
 scenarios:
   - name: "Get Posts"
