@@ -1,0 +1,25 @@
+config:
+  target: "https://jsonplaceholder.typicode.com"
+  phases:
+    - duration: 10
+      arrivalRate: 1
+      name: Warm up
+    - duration: 20
+      arrivalRate: 5
+      rampTo: 10
+      name: Ramp up load
+  processor: "./processor.ts"
+
+scenarios:
+  - name: "Get Posts"
+    flow:
+      - get:
+          url: "/posts"
+  - name: "Create Post"
+    flow:
+      - post:
+          url: "/posts"
+          json:
+            title: "Performance Test"
+            body: "Testing with Artillery"
+            userId: 1

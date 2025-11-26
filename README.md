@@ -58,6 +58,19 @@ Após a execução dos testes, você pode gerar e abrir o relatório Allure:
 npm run report
 ```
 
+### Testes de Performance (Carga)
+Para executar o teste de carga com Artillery:
+
+```bash
+npm run test:perf
+```
+
+Isso executará o teste e gerará um relatório JSON. Para gerar o relatório HTML visual:
+
+```bash
+npm run report:perf
+```
+
 ## 🧪 Cenários Cobertos
 
 1.  **Fluxo de Compra (E2E)**:
