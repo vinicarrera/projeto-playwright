@@ -6,3 +6,5 @@ playwright/.cache/
 allure-results/
 allure-report/
 .env
+tests/performance/report.json
+tests/performance/report.html

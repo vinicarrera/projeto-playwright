@@ -11,30 +11,37 @@ Você pode visualizar a execução mais recente dos testes diretamente no navega
 - **[Playwright](https://playwright.dev/)**: Framework de testes moderno e rápido.
 - **TypeScript**: Tipagem estática para maior segurança e manutenibilidade.
 - **Page Object Model (POM)**: Padrão de projeto para organizar e reutilizar código de testes.
-- **Allure Report**: Relatórios detalhados e visuais.
+- **Allure Report**: Relatórios detalhados e visuais dos testes E2E.
+- **k6**: Ferramenta de testes de carga/performance.
 - **GitHub Actions**: Pipeline de CI/CD para execução automática dos testes.
 
 ## 🏗️ Estrutura do Projeto
 
 ```
-d:/Projetos/projeto-playwright/
-├── .github/workflows/   # Configuração do CI/CD
-├── pages/               # Page Objects (Camada de abstração)
+projeto-playwright/
+├── .github/workflows/       # Configuração do CI/CD
+│   └── playwright.yml
+├── pages/                   # Page Objects (Camada de abstração)
 │   ├── LoginPage.ts
 │   ├── InventoryPage.ts
 │   ├── CartPage.ts
 │   └── CheckoutPage.ts
-├── tests/               # Arquivos de teste
-│   ├── e2e-purchase.spec.ts  # Fluxo completo de compra
-│   └── login.spec.ts         # Testes de autenticação (caminho infeliz)
-├── playwright.config.ts # Configuração global do Playwright
-└── package.json         # Dependências e scripts
+├── tests/                   # Arquivos de teste
+│   ├── e2e-purchase.spec.ts # Fluxo completo de compra
+│   ├── login.spec.ts        # Testes de autenticação
+│   ├── api.spec.ts          # Testes de API
+│   └── performance/         # Testes de performance
+│       └── load-test.js     # Teste de carga com k6
+├── playwright.config.ts     # Configuração global do Playwright
+├── tsconfig.json            # Configuração do TypeScript
+└── package.json             # Dependências e scripts
 ```
 
 ## 💻 Como Rodar o Projeto
 
 ### Pré-requisitos
-- Node.js instalado (versão 14 ou superior).
+- Node.js instalado (versão 18 ou superior).
+- [k6](https://k6.io/docs/get-started/installation/) instalado para testes de performance.
 
 ### Instalação
 Clone o repositório e instale as dependências:
@@ -44,14 +51,14 @@ npm install
 npx playwright install
 ```
 
-### Executando os Testes
-Para rodar todos os testes em modo visual (headed):
+### Executando os Testes E2E
+Para rodar todos os testes:
 
 ```bash
 npm test
 ```
 
-### Gerando Relatórios
+### Gerando Relatórios Allure
 Após a execução dos testes, você pode gerar e abrir o relatório Allure:
 
 ```bash
@@ -59,34 +66,35 @@ npm run report
 ```
 
 ### Testes de Performance (Carga)
-Para executar o teste de carga com Artillery:
+Para executar o teste de carga com k6:
 
 ```bash
 npm run test:perf
 ```
 
-Isso executará o teste e gerará um relatório JSON. Para gerar o relatório HTML visual:
-
-```bash
-npm run report:perf
-```
+> **Nota**: O k6 precisa estar instalado na máquina. Consulte a [documentação oficial](https://k6.io/docs/get-started/installation/) para instalação.
 
 ## 🧪 Cenários Cobertos
 
-1.  **Fluxo de Compra (E2E)**:
-    - Login com usuário padrão.
-    - Adição de produto ao carrinho.
-    - Validação do carrinho.
-    - Preenchimento de checkout.
-    - Finalização da compra com sucesso.
+1. **Fluxo de Compra (E2E)**:
+   - Login com usuário padrão.
+   - Adição de produto ao carrinho.
+   - Validação do carrinho.
+   - Preenchimento de checkout.
+   - Finalização da compra com sucesso.
 
-2.  **Autenticação**:
-    - Tentativa de login com credenciais inválidas (validação de mensagem de erro).
+2. **Autenticação**:
+   - Tentativa de login com credenciais inválidas (validação de mensagem de erro).
 
-3.  **API (JSONPlaceholder)**:
-    - Busca de post (GET).
-    - Criação de post (POST).
-    - Atualização de post (PUT).
+3. **API (JSONPlaceholder)**:
+   - Busca de post (GET).
+   - Criação de post (POST).
+   - Atualização de post (PUT).
+
+4. **Performance**:
+   - Teste de carga com k6 na API JSONPlaceholder.
+   - Fases de warm-up e ramp-up.
+   - Thresholds de SLA (95% das requisições < 500ms, taxa de erro < 1%).
 
 ---
 Desenvolvido por Vinicius Carrera como parte do portfólio de QA Automation.
