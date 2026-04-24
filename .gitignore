@@ -5,6 +5,7 @@ blob-report/
 playwright/.cache/
 allure-results/
 allure-report/
+.features-gen/
 .env
 tests/performance/report.json
 tests/performance/report.html

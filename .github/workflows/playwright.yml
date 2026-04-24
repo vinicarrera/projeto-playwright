@@ -19,6 +19,8 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+    - name: Generate BDD tests
+      run: npx bddgen
     - name: Run Playwright tests
       run: npx playwright test
       continue-on-error: true
